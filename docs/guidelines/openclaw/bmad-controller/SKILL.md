@@ -66,10 +66,23 @@ When working in a project that contains BMAD (e.g. `_bmad/` or configured BMAD f
 - Switch context sessions with `bmad context switch <session-name>`.
 - Vector search uses the active LLM's embeddings; falls back to local TF-IDF offline.
 
+## Token Efficiency (MUST follow — stay within free-tier limits)
+
+1. **Local search only** — Do not bloat prompts with full docs. Use QMD skill (BM25 + vector) or `bmad context search`; send only retrieved snippets. Never auto-load MEMORY.md or full session history so free quota lasts.
+2. **Session initialization** — On every session start, load ONLY: SOUL.md, USER.md, IDENTITY.md, memory/YYYY-MM-DD.md (if exists), memory/openclaw-learning.md (if exists). Do NOT auto-load MEMORY.md, session history, prior messages, or previous tool outputs. When the user asks about prior context, use memory_search() on demand and memory_get() for the snippet; do not load the whole file. At end of session, update memory/YYYY-MM-DD.md with: what you worked on, decisions made, leads, blockers, next steps.
+3. **Web search** — Use Exa.ai (free MCP skill) so you don't burn free credits on paid search.
+4. **Model routing** — Use BMAD: `bmad llm` + `bmad tokens report` to switch free-tier provider when one is near limit. Optionally Open Router / Claw Router for auto-routing.
+5. **Heartbeats** — Heartbeat checks MUST use a free local LLM (e.g. Ollama Llama 3.2 3B), not the API. Configure OpenClaw so heartbeats consume zero API tokens.
+6. **Kimi K 2.5** — Optional primary with free trial (see docs/guidelines/openclaw-cost-optimization.md for setup).
+
+## Learning (adapt to user)
+
+- **OpenClaw learning:** Load `memory/openclaw-learning.md` at session start when it exists. When the user gives a correction or states a preference, append it there. See docs/guidelines/openclaw-learning.md.
+- **BMAD learning:** In BMAD projects, use `bmad context store <key> "<content>" --namespace user` for shared user preferences and `bmad context search` to read learning. See docs/guidelines/learning-bmad.md.
+
 ## Full guidelines
 
-For the complete rule set, read:
+- **BMAD behavior:** `docs/guidelines/openclaw-bmad-guidelines.md`
+- **Token efficiency (free-tier preservation):** `docs/guidelines/openclaw-cost-optimization.md`
 
-- **In-repo:** `docs/guidelines/openclaw-bmad-guidelines.md` (relative to project root).
-
-Summary: **Load BMAD -> Read -> Follow. Use BMAD workflows and agents; manage LLMs via config; track tokens; search/store context.**
+Summary: **Load BMAD -> Read -> Follow. Use BMAD workflows and agents; manage LLMs; track tokens; search/store context. Apply session init and token-efficiency rules so OpenClaw stays within free API limits.**

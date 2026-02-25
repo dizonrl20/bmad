@@ -1,0 +1,12 @@
+node_modules
+.git
+*.log
+.env
+.DS_Store
+_bmad
+_bmad-output
+website/.astro
+website/dist
+build
+coverage
+test-output

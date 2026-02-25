@@ -5,6 +5,7 @@ BMAD controls how OpenClaw works in a BMAD project via **guidelines** and an opt
 ## Guidelines
 
 - **[OpenClaw–BMAD guidelines](../openclaw-bmad-guidelines.md)** — Canonical rules: BMAD is source of truth, load-then-follow workflows/agents, use `/bmad-help`, scale-adaptive behavior.
+- **[OpenClaw token efficiency (free-tier preservation)](../openclaw-cost-optimization.md)** — Local search (QMD / BMAD context), session init rule, Exa.ai, model routing, heartbeat to local LLM, Kimi K 2.5. Keeps usage within free API limits.
 
 ## BMAD controller skill
 

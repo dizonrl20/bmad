@@ -61,6 +61,22 @@ When OpenClaw is used in a BMAD-enabled project, **BMAD controls how OpenClaw wo
 
 - BMAD is scale-adaptive: planning depth should match project size (bug fix vs. enterprise). Follow BMAD's guidance for depth and rigor; do not always force maximum process on small changes.
 
+## Token Efficiency (Free-Tier Preservation)
+
+OpenClaw MUST follow token-efficiency practices so you stay within free API limits. Full playbook: [openclaw-cost-optimization.md](openclaw-cost-optimization.md) (token efficiency, no price focus).
+
+- **Local search** — Do not bloat prompts with full docs. Use QMD skill (BM25 + vector) or `bmad context search` and send only retrieved snippets. Cuts token use so free quota lasts.
+- **Session init** — On every session start, load ONLY: SOUL.md, USER.md, IDENTITY.md, memory/YYYY-MM-DD.md. Do NOT auto-load MEMORY.md, session history, prior messages, or prior tool outputs. Use memory_search() / memory_get() on demand. Update memory/YYYY-MM-DD.md at end of session.
+- **Web search** — Use Exa.ai (free MCP skill) for 24/7 bots so you don't burn free credits on paid search APIs.
+- **Model routing** — Use `bmad llm` + `bmad tokens report` to rotate free-tier providers when one is near limit. Optionally Open Router / Claw Router for auto-routing.
+- **Heartbeats** — Route heartbeat checks to a free local LLM (e.g. Ollama Llama 3.2 3B). Heartbeats must not consume API quota.
+- **Kimi K 2.5** — Optional primary with free trial; see token-efficiency doc for setup.
+
+## Learning Modules
+
+- **BMAD learning** — BMAD stores and retrieves user/project preferences and corrections via the context engine (namespace `learning`) and agent sidecars. See [learning-bmad.md](learning-bmad.md). Agents should search learning context and store new preferences when the user gives feedback.
+- **OpenClaw learning** — OpenClaw stores conversation and tooling preferences in `memory/openclaw-learning.md` and loads it at session start. See [openclaw-learning.md](openclaw-learning.md). Kept separate so OpenClaw adapts to the user independently; in BMAD projects it can also use `bmad context store --namespace user` for shared preferences.
+
 ## Summary
 
 | Rule | Meaning |
@@ -75,5 +91,9 @@ When OpenClaw is used in a BMAD-enabled project, **BMAD controls how OpenClaw wo
 | Token awareness | Check `tokens.sqlite` before tasks; avoid exhausted providers. |
 | Context memory | Search context before work; store decisions after. |
 | AI discovery | Reference `ai-discovery.json` for model recommendations. |
+| Token: local search | QMD or `bmad context search`; never paste full docs. |
+| Token: session init | Load only SOUL/USER/IDENTITY/memory/YYYY-MM-DD; no auto history. |
+| Token: heartbeats | Route to free local LLM (e.g. Ollama); no API quota. |
+| Token: routing | Rotate free-tier providers via `bmad llm` + `tokens report`; keep within limits. |
 
-These guidelines ensure OpenClaw acts as a **BMAD-driven** assistant rather than a generic coding assistant when working in a BMAD project.
+These guidelines ensure OpenClaw acts as a **BMAD-driven** assistant that stays within **free-tier** limits when working in a BMAD project.
