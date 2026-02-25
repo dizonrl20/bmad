@@ -142,6 +142,15 @@ platforms:
           template_type: opencode
           artifact_types: [workflows, tasks, tools]
 
+  openclaw:
+    name: "OpenClaw"
+    preferred: false
+    category: ide
+    description: "OpenClaw AI coding assistant (BMAD-controlled via guidelines)"
+    installer:
+      target_dir: .openclaw/skills
+      template_type: default
+
   qwen:
     name: "QwenCoder"
     preferred: false
