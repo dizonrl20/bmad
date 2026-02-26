@@ -73,3 +73,5 @@ So: **BMAD in this repo = CLI + installed file tree + guidelines that tell OpenC
 | Full auto-apply to job sites | No | Not in this repo; would need separate automation (e.g. Playwright) and design. |
 
 This review reflects the current implementation. For the exact Docker flow and path names, always refer to [DOCKER-RUN-BMAD-AND-OPENCLAW.md](openclaw/DOCKER-RUN-BMAD-AND-OPENCLAW.md) and the [Get started](openclaw-clawthorn-job-hunt.md#get-started-one-time-setup) section of the Clawthorn doc.
+
+For **what blocks OpenClaw** from fully applying BMAD (personas, workflows, context, LLM specialization, file ingestion, learning, orchestration, config) and **concrete actions to unblock it**, see [BMAD–OpenClaw integration roadmap](openclaw/BMAD-OPENCLAW-INTEGRATION-ROADMAP.md).

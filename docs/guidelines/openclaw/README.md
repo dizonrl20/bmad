@@ -8,6 +8,7 @@ BMAD controls how OpenClaw works in a BMAD project via **guidelines** and an opt
 - **[OpenClaw token efficiency (free-tier preservation)](../openclaw-cost-optimization.md)** — Local search (QMD / BMAD context), session init rule, Exa.ai, model routing, heartbeat to local LLM, Kimi K 2.5. Keeps usage within free API limits.
 - **[OpenClaw orchestrator (Clawdette)](../openclaw-orchestrator.md)** — Orchestrator persona (Clawdette) connected to the learning module; subagents (Clawrence, Clawdia, Clawton, Clawra, Clawthorn); manual IDE/LLM override; Clawdette can pick LLM by token availability and ranking when allowed.
 - **[Clawthorn job-hunt](../openclaw-clawthorn-job-hunt.md)** — Job-application subagent: navigate Indeed, LinkedIn, Workday, GC Jobs, Ontario, St. Catharines, NRCan; track applications in a spreadsheet; flag failures; teachable by user.
+- **[BMAD–OpenClaw integration roadmap](BMAD-OPENCLAW-INTEGRATION-ROADMAP.md)** — Unblocking guide: persona mapping, workflow translation, context strategy, LLM tiers (including paid APIs), file ingestion, learning, multi-agent orchestration, config. Use this to translate BMAD principles into concrete OpenClaw actions and configurations.
 
 ## BMAD controller skill
 
