@@ -72,6 +72,10 @@ OpenClaw MUST follow token-efficiency practices so you stay within free API limi
 - **Heartbeats** — Route heartbeat checks to a free local LLM (e.g. Ollama Llama 3.2 3B). Heartbeats must not consume API quota.
 - **Kimi K 2.5** — Optional primary with free trial; see token-efficiency doc for setup.
 
+## Orchestrator and subagents (optional)
+
+- **Clawdette** — An optional orchestrator persona connects to the OpenClaw learning module and delegates to subagents (Clawrence, Clawdia, Clawton, Clawra). She can pick the LLM by token availability and ranking when you allow it; you can always override IDE and LLM manually. See [openclaw-orchestrator.md](openclaw-orchestrator.md).
+
 ## Learning Modules
 
 - **BMAD learning** — BMAD stores and retrieves user/project preferences and corrections via the context engine (namespace `learning`) and agent sidecars. See [learning-bmad.md](learning-bmad.md). Agents should search learning context and store new preferences when the user gives feedback.
