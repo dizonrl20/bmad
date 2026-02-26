@@ -4,12 +4,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Build tools so optionalDependencies (better-sqlite3, sqlite-vec) compile
+RUN apk add --no-cache python3 make g++
+
 # Copy package files (use npm install if no lockfile)
 COPY package.json ./
-COPY tools/bmad-npx-wrapper.js ./tools/
 
-# Install production deps only for smaller image; optional deps (better-sqlite3, sqlite-vec) may need build tools
-RUN npm install --omit=dev --ignore-scripts 2>/dev/null || npm install --ignore-scripts
+# Install production deps; optional native deps build in this stage
+RUN npm install --omit=dev
 
 # Copy full repo so CLI and configs are available
 COPY . .

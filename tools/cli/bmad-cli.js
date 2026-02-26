@@ -3,6 +3,11 @@ const path = require('node:path');
 const fs = require('node:fs');
 const { execSync } = require('node:child_process');
 const semver = require('semver');
+try {
+  require('dotenv').config();
+} catch {
+  // dotenv optional; env vars can be set by shell or Docker
+}
 const prompts = require('./lib/prompts');
 
 // The installer flow uses many sequential @clack/prompts, each adding keypress

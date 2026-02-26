@@ -14,5 +14,7 @@ services:
       - .:/workspace
     environment:
       - NODE_ENV=production
+    # Optional: use env_file: .env to load API keys (create from .env.example)
+    # env_file: .env
     # Override CMD when running: e.g. install, llm list, tokens refresh
     command: ["--help"]
