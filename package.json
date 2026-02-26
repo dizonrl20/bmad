@@ -26,6 +26,7 @@
   "scripts": {
     "bmad:install": "node tools/cli/bmad-cli.js install",
     "bmad:uninstall": "node tools/cli/bmad-cli.js uninstall",
+    "clawthorn:init": "node scripts/init-clawthorn-memory.js",
     "docs:build": "node tools/build-docs.mjs",
     "docs:dev": "astro dev --root website",
     "docs:fix-links": "node tools/fix-doc-links.js",

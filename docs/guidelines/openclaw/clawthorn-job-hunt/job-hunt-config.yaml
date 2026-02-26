@@ -4,6 +4,10 @@
 resume_path: "/Users/roddizon/Downloads/Rod Dizon 2026 .pdf"
 # Env override: CLAWTHORN_RESUME_PATH
 
+# Resume text: paste your resume here so the agent can read it (or run a PDF extractor).
+# Path is relative to project root where BMAD is installed.
+resume_text_path: "_bmad/_memory/resume-text.txt"
+
 linkedin_url: "https://www.linkedin.com/in/rodlesterdizon/"
 github_demo_repo: "https://github.com/dizonrl20/accessibility"
 
@@ -19,6 +23,15 @@ job_sites:
   st_catharines_local: "https://www.indeed.com/jobs?l=St.+Catharines%2C+ON"
   nrcan: "https://natural-resources.canada.ca/careers"
 
-# Spreadsheet: path to CSV (or XLSX) for application tracking. Create if missing.
-# Columns: Job title, Source, URL, Date attempted, Status (Applied|Failed|Blocked), Notes
+# Spreadsheet: path to CSV for application tracking. Create if missing.
+# Columns: Job title, Company, Source, URL, Date attempted, Status (Applied|Failed|Blocked), Notes
+# See job-applications-spreadsheet-guide.md for traceability (role, company, URL, success).
 spreadsheet_path: "_bmad/_memory/job-applications.csv"
+
+# Daily limits: do not exceed this many applications per calendar day. Stagger by site.
+daily_application_cap: 20
+# Min/max range (for display): 10–20 per day
+daily_application_min: 10
+
+# Per-site staggering: do not apply to many jobs from the same site in one go. Spread applications across sites and time (e.g. a few per site, then switch site or wait).
+stagger_by_site: true

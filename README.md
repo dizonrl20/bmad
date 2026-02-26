@@ -28,8 +28,9 @@
 
 **Quick decision guide:**  
 - **“I just want BMAD in my project”** → Clone this repo, run `npm install`, then `node tools/cli/bmad-cli.js install --directory /path/to/my/project`.  
-- **“I want to run everything in Docker”** → See [RUN.md](RUN.md).  
+- **“I want to run everything in Docker”** → See [RUN.md](RUN.md). For **Docker + OpenClaw + Clawthorn** (full flow): [Docker run BMAD and OpenClaw](docs/guidelines/openclaw/DOCKER-RUN-BMAD-AND-OPENCLAW.md) or run `./scripts/deploy-with-docker.sh` from the repo root for an easy deploy that builds and inits, then follow the printed steps.  
 - **“I use OpenClaw and want it to follow BMAD”** → After install, copy the OpenClaw skills and add the rules from the docs; see [OpenClaw setup](#4-openclaw-setup-optional) below.
+- **“I want Clawthorn for job applications”** → One-time setup: [Get started (Clawthorn)](docs/guidelines/openclaw-clawthorn-job-hunt.md#get-started-one-time-setup) — clone, install, `npm run clawthorn:init`, paste resume, copy skills, run OpenClaw.
 
 ---
 
@@ -264,7 +265,7 @@ node tools/cli/bmad-cli.js install --directory /path/to/project
 
 Follow the prompts (or add `--modules bmm --tools cursor --yes` to skip them). Then open your **project folder** in your AI IDE (Cursor, OpenClaw, Claude Code, etc.).
 
-**API keys:** Copy [.env.example](.env.example) to `.env` in the bmad repo or your project, add your keys (e.g. `GEMINI_API_KEY=...`), and the CLI will load them. Never commit `.env`.
+**API keys:** Copy [.env.example](.env.example) to `.env` and add your keys. Per-LLM guide (where to get each key): [LLM API keys guide](docs/guidelines/llm-api-keys-guide.md). Never commit `.env`.
 
 **Non-interactive (scripts/CI):**
 
