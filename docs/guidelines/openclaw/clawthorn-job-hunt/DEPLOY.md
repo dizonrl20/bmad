@@ -1,29 +1,12 @@
 # Clawthorn — Deploy (local or Docker)
 
-This folder and branch `develop-job-app` are for deploying the job-application agent on a local machine or in Docker.
+**One clean path:** Follow **Get started** in [openclaw-clawthorn-job-hunt.md](../../openclaw-clawthorn-job-hunt.md). It covers clone → install → `npm run clawthorn:init` → paste resume → copy skills → run OpenClaw.
 
-## Branch: develop-job-app
+## Quick reference
 
-- Contains: Clawthorn skill, config with your resume path / LinkedIn / GitHub / goal, spreadsheet template, and orchestrator updates.
-- **Commit and push** (run in a normal terminal; Cursor’s git may inject options that break commit):
-  ```bash
-  cd /path/to/bmad
-  git checkout develop-job-app
-  git add docs/guidelines/openclaw-clawthorn-job-hunt.md docs/guidelines/openclaw/clawthorn-job-hunt/ docs/guidelines/openclaw-orchestrator.md docs/guidelines/openclaw/README.md docs/guidelines/openclaw/clawdette-orchestrator/SKILL.md
-  git commit -m "feat: add Clawthorn job-application agent"
-  git push bmad develop-job-app
-  ```
-
-## Local
-
-1. Clone or pull repo, checkout `develop-job-app`.
-2. Copy skill: `cp -r docs/guidelines/openclaw/clawthorn-job-hunt ~/.openclaw/workspace/skills/`
-3. Set resume path in `job-hunt-config.yaml` or env `CLAWTHORN_RESUME_PATH`.
-4. Create `_bmad/_memory/job-applications.csv` with header: `Job title,Source,URL,Date attempted,Status,Notes` (or copy from `job-applications-template.csv`).
-
-## Docker
-
-1. Build from repo root (same Dockerfile as main).
-2. Mount project dir so `_bmad/_memory/` and config are available.
-3. Set `CLAWTHORN_RESUME_PATH` to resume path inside container (e.g. `/workspace/resume.pdf`).
-4. Run OpenClaw (or your runner) inside the container with the mounted project.
+- **OpenClaw skills to install (orchestrator + Clawthorn):** See [openclaw-skills-to-install.md](../openclaw-skills-to-install.md). Install **bmad-controller**, **clawdette-orchestrator**, and **clawthorn-job-hunt** so OpenClaw can run the orchestrator and Clawthorn for job applications.
+- **Init memory/spreadsheet:** From bmad repo: `npm run clawthorn:init` (or `npm run clawthorn:init -- --directory /path/to/project`). Creates CSV with columns: Job title, Company, Source, URL, Date attempted, Status, Notes.
+- **Resume:** Paste your resume text into `_bmad/_memory/resume-text.txt` so Clawthorn can read it.
+- **Trace back applications:** Spreadsheet is at `_bmad/_memory/job-applications.csv`. See [job-applications-spreadsheet-guide.md](job-applications-spreadsheet-guide.md).
+- **Config:** `job-hunt-config.yaml` in this folder; override resume path with env `CLAWTHORN_RESUME_PATH` if needed (e.g. Docker).
+- **Tools/Docker (Playwright, etc.):** See [tools-and-dependencies.md](tools-and-dependencies.md).
