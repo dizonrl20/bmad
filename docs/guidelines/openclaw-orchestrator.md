@@ -29,6 +29,7 @@ Each subagent has a distinct role. Clawdette routes work to them by task type. A
 | **Clawdia**   | Implementation     | Code, scripts, tests, refactors; follows BMAD dev-story/quick-dev when applicable. |
 | **Clawton**   | Review & QA         | Code review, testing strategy, validation, adversarial checks. |
 | **Clawra**    | Documentation      | Docs, README, comments, project-context; follows tech-writer standards when BMAD present. |
+| **Clawthorn** | Job applications   | Navigate Indeed, LinkedIn, Workday, GC Jobs, Ontario, St. Catharines, NRCan; apply using resume/LinkedIn/GitHub; track in spreadsheet; flag failures; teachable by user. See [Clawthorn job-hunt](openclaw-clawthorn-job-hunt.md). |
 
 - **Naming:** Use these persona names in prompts and in learning (e.g. "Clawdia handles implementation; user prefers tabs").
 - **Learning:** When a subagent receives user feedback, it is recorded in `memory/openclaw-learning.md` (and optionally `bmad context store ... --namespace user`) so Clawdette and others adapt next time.
@@ -62,6 +63,24 @@ You are **not** required to use Claude Code. You can use OpenClaw, Cursor, or an
 
 ---
 
+## LLM tier by agent (maximize tokens, delegate wisely)
+
+Assign **stronger free LLMs** to agents that need deep thinking, research, or code. Use **lighter/faster free LLMs** for orchestration and simple tasks so you save tokens and maximize delegation to the claw agents.
+
+| Tier   | Use for | Agents | Goal |
+|--------|--------|--------|------|
+| **Heavy** | Deep thinking, research, code, review | **Clawrence** (research, planning, discovery), **Clawdia** (implementation), **Clawton** (review & QA) | Best quality within free tier; these do the hard work. |
+| **Light** | Delegation, routing, simple tasks, process | **Clawdette** (orchestrator only) | Minimize tokens on coordination so quota goes to the subagents. |
+
+**Recommended free LLMs (when Clawdette picks or you set manually):**
+
+- **Heavy (for Clawrence, Clawdia, Clawton):** Prefer in this order when quota allows: **Google Gemini** (`gemini-2.5-pro` or `gemini-2.5-flash`), **DeepSeek** (`deepseek-chat` or `deepseek-reasoner`), **Groq** (`llama-3.3-70b-versatile`), **Mistral** (`mistral-large-latest`), **Cerebras** (`llama-3.3-70b`), **OpenRouter** free models, **GitHub Models** (`gpt-4o` / `o3-mini`), **NVIDIA NIM**, **Cohere** (`command-r-plus`). Set via `bmad llm switch <provider> [model]` for the session when a heavy subagent is active.
+- **Light (for Clawdette):** Prefer **Gemini** (`gemini-2.5-flash-lite`), **Groq** (any), **Cerebras**, or **Cloudflare Workers AI** — fast, low cost per request, enough for routing and delegation. Use light when only Clawdette is working (e.g. deciding who does what, assigning tasks); switch to heavy when delegating to Clawrence/Clawdia/Clawton/Clawra.
+
+**In practice:** If your setup has a single active LLM at a time, set it to a **heavy** model when you are about to hand work to Clawrence/Clawdia/Clawton (or Clawra for docs). Use a **light** model when you are only doing orchestration (Clawdette) or simple process steps. Clawdette (when allowed to pick) can run `bmad llm switch` to a light provider when she is only routing, and to a heavy provider before delegating to a subagent that will do research, code, or review.
+
+---
+
 ## Clawdette LLM pick (token availability + ranking)
 
 When Clawdette is allowed to choose the LLM:
@@ -86,8 +105,9 @@ When Clawdette is allowed to choose the LLM:
 | Item            | Description |
 |-----------------|-------------|
 | **Clawdette**   | Orchestrator; connects to learning, delegates to subagents, follows BMAD, can pick LLM by tokens + rank. |
-| **Subagents**   | Clawrence (research), Clawdia (implementation), Clawton (review), Clawra (documentation); persona names. |
+| **Subagents**   | Clawrence (research), Clawdia (implementation), Clawton (review), Clawra (documentation), Clawthorn (job applications); persona names. |
 | **Learning**    | Orchestrator loads openclaw-learning.md + BMAD context; subagents report back so learning stays updated. |
 | **Manual IDE**  | You choose OpenClaw, Claude Code, Cursor, etc.; BMAD install supports all via `--tools`. |
 | **Manual LLM**  | Set in llm-config.yaml or `bmad llm switch`; env vars for API keys. |
 | **Auto LLM**    | Clawdette can run `bmad tokens report` + ranking and `bmad llm switch` when you allow it. |
+| **Heavy vs light** | Heavy LLMs for Clawrence/Clawdia/Clawton/Clawra (research, code, review, docs); light LLMs for Clawdette (orchestration only) to save tokens and maximize delegation. |

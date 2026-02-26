@@ -1,0 +1,24 @@
+# Clawthorn job-hunt config — actual values for Rod Dizon
+# Override resume_path via env CLAWTHORN_RESUME_PATH on Docker or another machine.
+
+resume_path: "/Users/roddizon/Downloads/Rod Dizon 2026 .pdf"
+# Env override: CLAWTHORN_RESUME_PATH
+
+linkedin_url: "https://www.linkedin.com/in/rodlesterdizon/"
+github_demo_repo: "https://github.com/dizonrl20/accessibility"
+
+goal: "Apply for tester and automation jobs; target stable jobs (e.g. government, enterprise)."
+
+# Job sites to monitor and attempt applications
+job_sites:
+  indeed: "https://www.indeed.com/"
+  linkedin: "https://www.linkedin.com/jobs/"
+  workday: "https://www.workday.com/en-us/company/careers.html"
+  gc_jobs: "https://psjobs-emploisfp.psc-cfp.gc.ca/psrs-srfp/applicant/page2440?fromMenu=true"
+  ontario_jobs: "https://www.ontario.ca/page/government-jobs"
+  st_catharines_local: "https://www.indeed.com/jobs?l=St.+Catharines%2C+ON"
+  nrcan: "https://natural-resources.canada.ca/careers"
+
+# Spreadsheet: path to CSV (or XLSX) for application tracking. Create if missing.
+# Columns: Job title, Source, URL, Date attempted, Status (Applied|Failed|Blocked), Notes
+spreadsheet_path: "_bmad/_memory/job-applications.csv"
