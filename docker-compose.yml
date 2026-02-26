@@ -1,0 +1,18 @@
+# BMAD — run CLI in a container (Mac/PC)
+# Usage:
+#   docker-compose run --rm bmad install --directory /workspace
+#   docker-compose run --rm bmad llm list
+# Mount your project at /workspace when running install.
+version: "3.9"
+services:
+  bmad:
+    build: .
+    image: bmad-cli:latest
+    working_dir: /app
+    volumes:
+      # Mount your project so "bmad install" can write _bmad and IDE configs
+      - .:/workspace
+    environment:
+      - NODE_ENV=production
+    # Override CMD when running: e.g. install, llm list, tokens refresh
+    command: ["--help"]

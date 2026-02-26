@@ -88,6 +88,11 @@ program.version(packageJson.version).description('BMAD Core CLI - Universal AI a
 for (const [name, cmd] of Object.entries(commands)) {
   const command = program.command(name).description(cmd.description);
 
+  // Add arguments
+  for (const arg of cmd.arguments || []) {
+    command.argument(arg);
+  }
+
   // Add options
   for (const option of cmd.options || []) {
     command.option(...option);

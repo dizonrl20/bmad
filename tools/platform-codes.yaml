@@ -37,6 +37,12 @@ platforms:
     category: ide
     description: "OpenCode terminal coding assistant"
 
+  openclaw:
+    name: "OpenClaw"
+    preferred: false
+    category: ide
+    description: "OpenClaw AI coding assistant (BMAD-controlled via guidelines)"
+
   codebuddy:
     name: "CodeBuddy"
     preferred: false
